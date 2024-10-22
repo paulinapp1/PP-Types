@@ -1,6 +1,9 @@
 ﻿// Write required code.
 
 // Data - do not change it in code!
+using System.ComponentModel.Design;
+using System.Runtime.InteropServices.Marshalling;
+
 string[] names = {
     "Mickey Mouse", "Minnie Mouse", "Donald Duck", "Goofy", "Pluto", "Daisy Duck", "Simba", "Nala", 
     "Timon", "Pumbaa", "Mufasa", "Ariel", "Flounder", "Sebastian", "Ursula", "Belle", "Beast", "Gaston", 
@@ -14,9 +17,14 @@ string[] names = {
 // After last element should be ".".
 void PrintGroups(string[] t, int perLine)
 {
-
-    // Write required code.
-
+     for(int i=0; i<t.Length; i += perLine)
+    {
+        for(int j=i; j<i+perLine && j<t.Length; j++)
+        {
+            Console.Write(t[j] + (j == t.Length-1 ? "." : ", "));
+        }
+        Console.WriteLine();
+    }
 }
 
 
@@ -28,10 +36,33 @@ void PrintGroups(string[] t, int perLine)
 void PrintColumns(string[] t, int perLine, int width)
 {
 
-    // Write required code.
+    for (int i = 0; i < t.Length; i += perLine)
+    {
+        for (int j = i; j < i + perLine && j < t.Length; j++)
+        {
+            string word = t[j];
 
+            
+            if (word.Length > width)
+            {
+                word = word.Substring(0, width);
+            }
+            int remaining = width - word.Length;
+            string spaces = new string(' ', remaining);
+            if(j<i+perLine-1 && j < t.Length - 1) {
+                Console.Write(word + spaces + "|");
+            }
+            else
+            {
+                Console.Write(word + spaces);
+            }
+
+            
+        }
+
+        Console.WriteLine(); 
+    }
 }
-
 
 // Test how your functions work. 
 // You can temprary comment some lines not needed for current testing.
